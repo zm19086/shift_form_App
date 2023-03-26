@@ -138,12 +138,23 @@ function createTakeMinList(){
   })
 }
 
-const current = new Date();
-const MonthOfDate = new Date(current.getFullYear(), current.getMonth() + 1, 0);
+// window.onload = function () {
+  // }
+createOptions();
 
-createYearList();
-createMonthsList(current.getMonth() + 1);
-createDateList(MonthOfDate.getDate(), current.getDate());
-createHourList();
-createMinList();
-createTakeMinList();
+function createOptions(){
+  const current = new Date();
+  const MonthOfDate = new Date(current.getFullYear(), current.getMonth() + 1, 0);
+  
+  createYearList();
+  createMonthsList(current.getMonth() + 1);
+  createDateList(MonthOfDate.getDate(), current.getDate());
+  createHourList();
+  createMinList();
+  createTakeMinList();
+}
+
+const selectWhet = document.getElementById('recruitmentWhet');
+selectWhet.addEventListener('change', function(){
+  createOptions();
+})
