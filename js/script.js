@@ -139,7 +139,7 @@ function createTakeMinList(){
 }
 
 const current = new Date();
-const MonthOfDate = new Date(current.getFullYear(), current.getMonth(), 0);
+const MonthOfDate = new Date(current.getFullYear(), current.getMonth() + 1, 0);
 
 createYearList();
 createMonthsList(current.getMonth() + 1);
