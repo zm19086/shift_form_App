@@ -17,12 +17,15 @@ function createYearList(){
   };
 }
 
-function createMonthsList(){
+function createMonthsList(currentMonth){
   for (let i = 1; i < 13; i++) {
     let option = document.createElement('option');
     const startMonth = document.getElementById('startMonth');
     option.value = i;
     option.textContent = i;
+    if(currentMonth === i){
+      option.selected = true;
+    };
     startMonth.appendChild(option);
   };
   for (let i = 1; i < 13; i++) {
@@ -30,12 +33,15 @@ function createMonthsList(){
     const endMonth = document.getElementById('endMonth');
     option.value = i;
     option.textContent = i;
+    if(currentMonth === i){
+      option.selected = true;
+    };
     endMonth.appendChild(option);
   };
 };
 
-function createDateList(){
-  for (let i = 1; i < 32; i++) {
+function createDateList(dateNum, currentDate){
+  for (let i = 1; i < dateNum + 1; i++) {
     let option = document.createElement('option');
     const startDate = document.getElementById('startDate');
     if (i < 0) {
@@ -45,9 +51,12 @@ function createDateList(){
       option.value = i;
       option.textContent = i;
     };
+    if(currentDate === i){
+      option.selected = true;
+    };
     startDate.appendChild(option);
   };
-  for (let i = 1; i < 32; i++) {
+  for (let i = 1; i < dateNum + 1; i++) {
     let option = document.createElement('option');
     const endDate = document.getElementById('endDate');
     if (i < 0) {
@@ -57,9 +66,11 @@ function createDateList(){
       option.value = i;
       option.textContent = i;
     };
+    if(currentDate === i){
+      option.selected = true;
+    };
     endDate.appendChild(option);
   };
-  endDate.options[1].selected = true;
 };
 
 function createHourList(){
@@ -127,9 +138,12 @@ function createTakeMinList(){
   })
 }
 
+const current = new Date();
+const MonthOfDate = new Date(current.getFullYear(), current.getMonth(), 0);
+
 createYearList();
-createMonthsList();
-createDateList();
+createMonthsList(current.getMonth() + 1);
+createDateList(MonthOfDate.getDate(), current.getDate());
 createHourList();
 createMinList();
 createTakeMinList();
