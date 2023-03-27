@@ -40,35 +40,24 @@ function createMonthsList(currentMonth){
   };
 };
 
-function createDateList(dateNum, currentDate){
+function createStartDateList(dateNum){
+  document.getElementById('startDate').textContent = '';
   for (let i = 1; i < dateNum + 1; i++) {
     let option = document.createElement('option');
     const startDate = document.getElementById('startDate');
-    if (i < 0) {
-      option.value = `0${i}`
-      option.textContent = `0${i}`;
-    } else {
-      option.value = i;
-      option.textContent = i;
-    };
-    if(currentDate === i){
-      option.selected = true;
-    };
+    option.value = i;
+    option.textContent = i;
     startDate.appendChild(option);
   };
+}
+
+function createEndDateList(dateNum){
+  document.getElementById('endDate').textContent = '';
   for (let i = 1; i < dateNum + 1; i++) {
     let option = document.createElement('option');
     const endDate = document.getElementById('endDate');
-    if (i < 0) {
-      option.value = `0${i}`
-      option.textContent = `0${i}`;
-    } else {
       option.value = i;
       option.textContent = i;
-    };
-    if(currentDate === i){
-      option.selected = true;
-    };
     endDate.appendChild(option);
   };
 };
@@ -138,23 +127,49 @@ function createTakeMinList(){
   })
 }
 
-// window.onload = function () {
-  // }
-createOptions();
-
 function createOptions(){
   const current = new Date();
-  const MonthOfDate = new Date(current.getFullYear(), current.getMonth() + 1, 0);
-  
+  const MonthOfDateNum = new Date(current.getFullYear(), current.getMonth() + 1, 0);
   createYearList();
   createMonthsList(current.getMonth() + 1);
-  createDateList(MonthOfDate.getDate(), current.getDate());
+  createStartDateList(MonthOfDateNum.getDate());
+  createEndDateList(MonthOfDateNum.getDate());
   createHourList();
   createMinList();
   createTakeMinList();
 }
 
-const selectWhet = document.getElementById('recruitmentWhet');
-selectWhet.addEventListener('change', function(){
-  createOptions();
+createOptions();
+
+const startYear = document.getElementById('startYear');
+const startMonth = document.getElementById('startMonth');
+const endYear = document.getElementById('endYear');
+const endMonth = document.getElementById('endMonth');
+
+startYear.addEventListener('change', function(){
+  const startYear = parseInt(document.getElementById('startYear').value);
+  const selectStartMonthPlusOne = parseInt(document.getElementById('startMonth').value);
+  const createStartDateNum = new Date(startYear, selectStartMonthPlusOne, 0).getDate();
+  createStartDateList(createStartDateNum);
+})
+
+startMonth.addEventListener('change', function(){
+  const startYear = parseInt(document.getElementById('startYear').value);
+  const selectStartMonthPlusOne = parseInt(document.getElementById('startMonth').value);
+  const createStartDateNum = new Date(startYear, selectStartMonthPlusOne, 0).getDate();
+  createStartDateList(createStartDateNum);
+})
+
+endYear.addEventListener('change', function(){
+  const endYear = parseInt(document.getElementById('endYear').value);
+  const selectEndMonthPlusOne = parseInt(document.getElementById('endMonth').value);
+  const createEndDateNum = new Date(endYear, selectEndMonthPlusOne, 0).getDate();
+  createEndDateList(createEndDateNum);
+})
+
+endMonth.addEventListener('change', function(){
+  const endYear = parseInt(document.getElementById('endYear').value);
+  const selectEndMonthPlusOne = parseInt(document.getElementById('endMonth').value);
+  const createEndDateNum = new Date(endYear, selectEndMonthPlusOne, 0).getDate();
+  createEndDateList(createEndDateNum);
 })

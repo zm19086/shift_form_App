@@ -1,6 +1,4 @@
-window.onload = function(){
-  limitOptions();
-};
+limitOptions();
 
 const selectWhet = document.getElementById('recruitmentWhet');
 selectWhet.addEventListener('change', function(){
